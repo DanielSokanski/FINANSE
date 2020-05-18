@@ -11,16 +11,16 @@
 
 using namespace std;
 
-class FileWithUsers: public XMLFile
+class FileWithUsers
 {
     CMarkup xml;
-    const string USERS_FILE_NAME;
+    //const string USERS_FILE_NAME;
     vector<User> users;
     User getUserData();
 public:
-    FileWithUsers(string fileNameWithUsers): XMLFile(fileNameWithUsers){
+    //FileWithUsers(string fileNameWithUsers): XMLFile(fileNameWithUsers){
 
-    };
+   // };
     vector <User> loadUsersFromFile();
     void addUserToFile(User user);
     void saveAllUsersToFile(vector<User> &users);

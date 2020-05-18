@@ -6,6 +6,7 @@ void IncomeManager::showAllIncomes() {
     if (!incomes.empty()) {
         cout << "             >>> ADRESACI <<<" << endl;
         cout << "-----------------------------------------------" << endl;
+        cout <<incomes.size()<<endl;
         for (int i=0; i<incomes.size(); i++) {
             cout << endl << "Id wydatku: " << incomes[i].getIncomeId() << endl;
             cout << "Id uzytkownika:     " << incomes[i].getUserId() << endl;
@@ -23,8 +24,8 @@ void IncomeManager::showAllIncomes() {
 void IncomeManager::addIncomes() {
     Incomes income = enterNewIncome();
     incomes.push_back(income);
-    //fileWithUsers.addIncomeToFile(income);
-    cout << endl << "Wprowadzono nowy przychod." << endl << endl;
+    fileWithIncomes.addIncomesToFile(income);
+    cout << endl << "Wprowadzono nowy wydatek." << endl << endl;
     system("pause");
 }
 
@@ -35,14 +36,15 @@ Incomes IncomeManager::enterNewIncome() {
     string date, item;
     string amount;
     char choise;
+    double correctAmount = 0;
     cout << "Wpisz date wydatku: ";
     cout << endl << "Czy dzis poniosles wydatek? (T,N): ";
     choise = getSign();
     if ((choise=='T')||(choise=='t')) {
-        int correctDate=todaysDate();
-        income.setDate(correctDate);
+        income.setDate(todaysDate());
     } else {
-    cout << "Wpisz date w formacie rrr-mm-dd:";
+    cout << "Wpisz date w formacie rrrr-mm-dd:";
+    cin.clear();
     getline(cin ,date);
     if (checkIfDateIsCorrect(date)==false){
         cin.clear();
@@ -57,46 +59,25 @@ Incomes IncomeManager::enterNewIncome() {
     getline(cin, item);
     income.setItem(item);
     cout << "Podaj kwote wydatku: ";
-    cin >> amount;
-    float correctAmount = changeCommaToDotInAmount(amount);
+    getline(cin, amount);
+    correctAmount = changeCommaToDotInAmount(amount);
+    cout << correctAmount << endl;
     income.setAmount(correctAmount);
-    correctAmount = 0;
-    incomes.push_back(income);
-    return incomes;
+
+    return income;
 }
 int IncomeManager::todaysDate() {
     vector<int> date;
-    date.clear();
-    int currentDate[7];
     time_t t = time(0);
     struct tm * now = localtime( & t );
+    int todaysDateInt=0;
+        date.push_back(now->tm_year + 1900);
+        date.push_back(now->tm_mon+1);
+        date.push_back(now->tm_mday);
+    todaysDateInt = date[0]*10000+date[1]*100+date[2];
 
-    if(((now->tm_mon+1)<10)&&((now->tm_mday)<10)) {
-        date.push_back(now->tm_year + 1900);
-        date.push_back(0);
-        date.push_back(now->tm_mon+1);
-        date.push_back(0);
-        date.push_back(now->tm_mday);
-    } else if ((now->tm_mday)<10) {
-        date.push_back(now->tm_year + 1900);
-        date.push_back(now->tm_mon+1);
-        date.push_back(0);
-        date.push_back(now->tm_mday);
-    } else if((now->tm_mon+1)<10) {
-        date.push_back(now->tm_year + 1900);
-        date.push_back(0);
-        date.push_back(now->tm_mon+1);
-        date.push_back(now->tm_mday);
-    } else {
-        date.push_back(now->tm_year + 1900);
-        date.push_back(now->tm_mon+1);
-        date.push_back(now->tm_mday);
-    }
-    for (int i=0; i<date.size(); i++)
-    {
-        currentDate[i] = date[i];
-    }
-    return currentDate;
+    date.clear();
+    return todaysDateInt;
 }
 char IncomeManager::getSign() {
     string income = "";
@@ -115,19 +96,26 @@ char IncomeManager::getSign() {
 
 
 int IncomeManager::getIdOfNewIncome() {
+
     if (incomes.empty() == true)
         return 1;
     else
-        return incomes.back().getIncomeId() + 1;
+        return incomes.size()+1;
+        //incomes.back().getIncomeId() + 1;
 }
 
-float IncomeManager::changeCommaToDotInAmount(string amount) {
-    float correctAmount;
+double IncomeManager::changeCommaToDotInAmount(string amount) {
+    string amountWithDot="";
+    double correctAmount = 0;
     for (int i=0; i<amount.length(); i++) {
-        if (amount[i]==",")
-            amount[i]==".";
+        if (amount[i]==',')
+            amountWithDot = amountWithDot + '.';
+        else
+            amountWithDot = amountWithDot + amount[i];
     }
-    correctAmount=atof(amount.C_str());
+    correctAmount=(double)atof(amountWithDot.c_str());
+
+    cout <<correctAmount<< endl;
     return correctAmount;
 }/*
 float IncomeManager::getIncomesFromCurrentMonth() {
@@ -176,11 +164,12 @@ void IncomeManager::getIncomesFromCustomDate() {
     return totalIncomes;
 }*/
 bool IncomeManager::checkIfDateIsCorrect(string date) {
+
     int day, month, year;
     string seperating = "";
     vector<string> tempDate;
     for (int i=0; i<date.length(); i++) {
-        if(date[i]!="-"){
+        if(date[i]!='-'){
             seperating = seperating + date[i];
         }
         else{
@@ -189,30 +178,39 @@ bool IncomeManager::checkIfDateIsCorrect(string date) {
         }
     }
     tempDate.push_back(seperating);
-    int year = atoi(tempDate[0]);
+    year = atoi(tempDate[0].c_str());
+
     if ((year < 2000) || (year > 2021)) {
         cout<< "Nieprawidlowy rok. Wpisz ponownie: ";
+        return false;
     }
-    int month = atoi(tempDate[1]);
+    month = atoi(tempDate[1].c_str());
+
     if (month > 12) {
         cout << "Nieprawidlowy miesiac. Wpisz ponownie: ";
+        return false;
     }
-    int day = atoi(tempDate[2]);
+    day = atoi(tempDate[2].c_str());
+
     if ((month == 4) || (month == 6) || (month == 9) || (month == 11)) {
         if (day > 30) {
             cout << "Miesiac " << month <<" ma 30 dni. Wpisz ponownie: ";
+            return false;
         }
     } else if (month == 2) {
         bool leapyear (year);
         if (leapyear == true)
             if (day > 29) {
                 cout << "Rok "<< year <<" jest przestepny. Zatem miesiac " << month << " ma maksymalnie 29 dni. Wpisz ponownie: ";
+                return false;
             } else if (day > 28) {
                 cout << "Miesiac " << month << " ma maksymalnie 28 dni. Wpisz ponownie: ";
+                return false;
             }
     } else {
         if (day > 31) {
             cout << "Miesiac " << month << " ma maksymalnie 31 dni. Wpisz ponownie: ";
+            return false;
         }
     }
 }

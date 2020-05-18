@@ -21,7 +21,8 @@ class UserManager
 
 
 public:
-    UserManager(string fileNameWithUsers):fileWithUsers(fileNameWithUsers){
+    UserManager() //(string fileNameWithUsers):fileWithUsers(fileNameWithUsers)
+    {
     loggedInUserId = 0;
     users = fileWithUsers.loadUsersFromFile();
     };

@@ -3,20 +3,24 @@
 
 #include <iostream>
 #include <vector>
+#include <iomanip>
+#include <string>
 #include <cstdlib>
 #include "Incomes.h"
 #include "Markup.h"
-#include "XMLFile.h"
-#include "IncomeManager.h"
+//#include "XMLFile.h"
 
 
-class FileWithIncomes: public XMLFile
+
+class FileWithIncomes
 {
-    const string FILE_NAME_WITH_INCOMES;
+    //const string FILE_NAME_WITH_INCOMES;
+    CMarkup xml;
     int lastIncomeId;
     int loadUserId();
+    vector<Incomes>incomes;
 public:
-    FileWIthIncomes(string fileName) : XMLFile(fileName)
+    FileWithIncomes()//(string fileName) : XMLFile(fileName)
         {
         lastIncomeId = 0;
         };

@@ -5,17 +5,18 @@
 1589310082 e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\user.h
 	<iostream>
 
-1589350605 source:e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\main.cpp
+1589797879 source:e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\main.cpp
 	<iostream>
 	<cstdlib>
 	"YourBudget.h"
+	"IncomeManager.h"
 
-1589350507 e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\yourbudget.h
+1589797879 e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\yourbudget.h
 	<iostream>
 	"UserManager.h"
 	"IncomeManager.h"
 
-1589313068 e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\usermanager.h
+1589784920 e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\usermanager.h
 	<iostream>
 	<vector>
 	<windows.h>
@@ -25,7 +26,7 @@
 1589310854 source:e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\usermanager.cpp
 	"UserManager.h"
 
-1589310329 source:e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\yourbudget.cpp
+1589797879 source:e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\yourbudget.cpp
 	"YourBudget.h"
 
 1585596396 source:e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\markup.cpp
@@ -42,10 +43,10 @@
 	<string>
 	<afx.h>
 
-1589315671 source:e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\filewithusers.cpp
+1589801765 source:e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\filewithusers.cpp
 	"FileWithUsers.h"
 
-1589315530 e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\filewithusers.h
+1589784928 e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\filewithusers.h
 	<iostream>
 	<vector>
 	<cstdlib>
@@ -53,19 +54,19 @@
 	"Markup.h"
 	"XMLFile.h"
 
-1589313029 e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\xmlfile.h
+1589356827 e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\xmlfile.h
 	<iostream>
 
 1589313029 source:e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\xmlfile.cpp
 	"XMLFile.h"
 
-1589350581 source:e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\incomes.cpp
+1589802356 source:e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\incomes.cpp
 	"Incomes.h"
 
-1589350581 e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\incomes.h
+1589802356 e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\incomes.h
 	<iostream>
 
-1589350967 e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\incomemanager.h
+1589807150 e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\incomemanager.h
 	<iostream>
 	<vector>
 	<windows.h>
@@ -73,6 +74,7 @@
 	<algorithm>
 	<cstdlib>
 	<time.h>
+	<string>
 	"UserManager.h"
 	"FileWithUsers.h"
 	"FileWithIncomes.h"
@@ -80,12 +82,18 @@
 	"User.h"
 	"XMLFile.h"
 
-1589350967 e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\filewithincomes.h
+1589803998 e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\filewithincomes.h
 	<iostream>
 	<vector>
+	<iomanip>
+	<string>
 	<cstdlib>
 	"Incomes.h"
 	"Markup.h"
-	"XMLFile.h"
+
+1589803999 source:e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\filewithincomes.cpp
+	"FileWithIncomes.h"
+
+1589802981 source:e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\incomemanager.cpp
 	"IncomeManager.h"
 

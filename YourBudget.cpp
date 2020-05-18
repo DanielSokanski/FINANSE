@@ -31,7 +31,7 @@ void YourBudget::loginOfUser()
     userManager.loginOfUser();
     if (isUserLogedIn())
     {
-        incomeManager = new IncomeManager (FILE_NAME_WITH_INCOMES, userManager.getIdOfLoggedInUser());
+        incomeManager = new IncomeManager (userManager.getIdOfLoggedInUser());
        // expenceManager = new ExpenceManager (FILE_NAME_WITH_EXPENCES, userManager.getIdOfLoggedInUser());
     }
 }
@@ -66,3 +66,8 @@ void YourBudget::logoutOfUser()
 {
     userManager.logoutOfUser();
 }
+void YourBudget::showAllIncomes()
+{
+    incomeManager -> showAllIncomes();
+}
+

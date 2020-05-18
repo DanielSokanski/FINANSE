@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <cstdlib>
 #include <time.h>
+#include <string>
 
 #include"UserManager.h"
 #include"FileWithUsers.h"
@@ -20,21 +21,24 @@ using namespace std;
 
 class IncomeManager
 {
-    const int LOGGED_IN_USER_ID;
+
     vector <Incomes>incomes;
     FileWithIncomes fileWithIncomes;
+    const int LOGGED_IN_USER_ID;
     int loggedInUserId;
     void showIncomesData(Incomes income);
+
 public:
-    IncomeManager(string fileNameWithIncomes, int loggedInUserId) :
-        fileWithIncomes(fileNameWithIncomes), LOGGED_IN_USER_ID (loggedInUserId)
+    IncomeManager (int loggedInUserId)://string fileNameWithIncomes, int loggedInUserId) :
+        //fileWithIncomes(fileNameWithIncomes),
+         LOGGED_IN_USER_ID (loggedInUserId)
         {
         incomes = fileWithIncomes.loadIncomesOfLoggedInUser(LOGGED_IN_USER_ID);
         };
     Incomes enterNewIncome();
     void showAllIncomes();
     void addIncomes();
-    float changeCommaToDotInAmount(string amount);
+    double changeCommaToDotInAmount(string amount);
     int todaysDate();
     bool checkIfDateIsCorrect(string date);
     //float getIncomesFromCurrentMonth();
@@ -42,6 +46,8 @@ public:
     //float getIncomesFromCustomDate();
     char getSign();
     int getIdOfNewIncome();
+    bool leapyear (int year);
+
 };
 
 

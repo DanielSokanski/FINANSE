@@ -14,14 +14,14 @@ class YourBudget
     UserManager userManager;
     IncomeManager *incomeManager;
     //ExpenceManager *expenceManager;
-    const string FILE_NAME_WITH_INCOMES;
-    const string FILE_NAME_WITH_EXPENCES;
+    //const string FILE_NAME_WITH_INCOMES;
+    //const string FILE_NAME_WITH_EXPENCES;
 public:
-    YourBudget
-    (string FileNameWithUsers, string fileNameWithIncomes)
+    YourBudget()
+    //(string FileNameWithUsers, string fileNameWithIncomes)
      //, string fileNameWithExpences)
-    :
-    userManager(FileNameWithUsers), FILE_NAME_WITH_INCOMES(fileNameWithIncomes)
+
+    //userManager(FileNameWithUsers), FILE_NAME_WITH_INCOMES(fileNameWithIncomes)
     //,FILE_NAME_WITH_INCOMES(fileNameWithIncomes), FILE_NAME_WITH_EXPENCES(fileNameWithExpences)*/
     {
     incomeManager = NULL;
@@ -47,6 +47,8 @@ public:
     void compareExpencesToIncomesFromCustomDates();
     void changePassword();
     void logoutOfUser();
+    void showAllIncomes();
+
 };
 
 

@@ -12,17 +12,6 @@ vector <User> FileWithUsers::loadUsersFromFile()
     while(xml.FindElem( "User" ))
     {
     user = getUserData();
-    /*xml.IntoElem();
-    xml.FindElem("UserId");
-    user.setUserId(atoi(MCD_2PCSZ(xml.GetData())));
-    xml.FindElem("Login");
-    user.setLogin(MCD_2PCSZ(xml.GetData()));
-    xml.FindElem("Password");
-    user.setPassword(MCD_2PCSZ(xml.GetData()));
-    xml.FindElem("Name");
-    user.setName(MCD_2PCSZ(xml.GetData()));
-    xml.FindElem("Surname");
-    user.setSurname(MCD_2PCSZ(xml.GetData()));*/
     users.push_back(user);
     xml.OutOfElem();
     }

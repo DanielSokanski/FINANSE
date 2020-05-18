@@ -46,8 +46,6 @@
 		<Unit filename="User.h" />
 		<Unit filename="UserManager.cpp" />
 		<Unit filename="UserManager.h" />
-		<Unit filename="XMLFile.cpp" />
-		<Unit filename="XMLFile.h" />
 		<Unit filename="YourBudget.cpp" />
 		<Unit filename="YourBudget.h" />
 		<Unit filename="main.cpp" />

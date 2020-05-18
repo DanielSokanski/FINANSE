@@ -1,19 +1,19 @@
 #include <iostream>
 #include <cstdlib>
 #include "YourBudget.h"
-
+#include "IncomeManager.h"
 using namespace std;
 
 int main()
 {
 
-    YourBudget yourBudget("Users.xml", "incomes.xml");
+    YourBudget yourBudget;
     //("users.xml" , "incomes.xml" ,"expences.xml");
 
-    FileWithUsers fileWithUsers("users.xml");
+    //FileWithUsers fileWithUsers("users.xml");
     //FileWithExpences fileWithExpences("expences.xml");
     //FileWithIncomes fileWithIncomes("incomes.xml");
-    int loggedInUserId=0;
+
     char choise;
     while (true)
     {
@@ -71,6 +71,10 @@ int main()
             case '7':
                 yourBudget.logoutOfUser();
                 break;
+            case '8':
+                yourBudget.showAllIncomes();
+                break;
+
 
             }
         }

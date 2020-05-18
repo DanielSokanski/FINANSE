@@ -20,4 +20,4 @@ public:
 
 };
 
-#endif // PLIKTEKSTOWY_H
+#endif

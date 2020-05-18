@@ -2,40 +2,58 @@
 
 vector <Incomes> FileWithIncomes::loadIncomesOfLoggedInUser(int userId)
 {
-    int date;
-    vector <Incomes> incomes;
     Incomes income;
+    vector <Incomes> incomes;
+
+        //cout << userId << endl;
+        //system("pause");
+    int USERID = 0;
+    string amount="";
     CMarkup xml;
-    xml.Load(getFileName().c_str());
+    bool fileExists = xml.Load( "incomes.xml" );
     xml.FindElem( "Incomes" );
     xml.IntoElem();
     while(xml.FindElem( "Income" ))
     {
     xml.IntoElem();
     xml.FindElem("userId");
-    int USERID = atoi(MCD_2PCSZ(xml.GetData()));
+    USERID = atoi(MCD_2PCSZ(xml.GetData()));
+        cout << USERID << endl;
+        system("pause");
     if (USERID == userId)
     {
-        xml.FindElem("incomeId");
+     xml.FindElem("incomeId");
         income.setIncomeId(atoi(MCD_2PCSZ(xml.GetData())));
+        cout << atoi(MCD_2PCSZ(xml.GetData()))<< endl;
         xml.FindElem("userId");
         income.setUserId(atoi(MCD_2PCSZ(xml.GetData())));
+        cout << atoi(MCD_2PCSZ(xml.GetData()))<< endl;
         xml.FindElem("date");
-        income.setIncomeId(changeToNumber(MCD_2PCSZ(xml.GetData())));
+        income.setDate(changeToNumber(MCD_2PCSZ(xml.GetData())));
+        cout << changeToNumber(MCD_2PCSZ(xml.GetData()))<< endl;
         xml.FindElem("item");
         income.setItem(MCD_2PCSZ(xml.GetData()));
+        cout << MCD_2PCSZ(xml.GetData())<< endl;
         xml.FindElem("amount");
-        income.setIncomeId(atoi/*strtof*/(MCD_2PCSZ(xml.GetData())));
+        amount = MCD_2PCSZ(xml.GetData());
+        cout << amount << endl;
+        income.setAmount((double)atof(amount. c_str()));
+        cout << (double)atof(amount. c_str())<< endl;
+
+    incomes.push_back(income);
+
     }
     xml.OutOfElem();
     }
-    incomes.push_back(income);
+
     return incomes;
 }
+
+
 void FileWithIncomes::addIncomesToFile(Incomes incomes)
 {
     CMarkup xml;
-    bool fileExists = xml.Load( getFileName().c_str() );
+    bool fileExists = xml.Load("incomes.xml");
 
     if (!fileExists)
     {
@@ -52,8 +70,8 @@ void FileWithIncomes::addIncomesToFile(Incomes incomes)
     xml.AddElem("date", incomes.getDate());
     xml.AddElem("item", incomes.getItem());
     xml.AddElem("amount", incomes.getAmount());
-    xml.Save("users.xml");
-
+    xml.Save("incomes.xml");
+    xml.OutOfElem();
 }
 
 int FileWithIncomes::changeToNumber(string date)
@@ -77,7 +95,7 @@ int FileWithIncomes::loadUserId()
 {
     CMarkup xml;
 
-    xml.Load( getFileName().c_str() );
+    xml.Load( "incomes.xml" );
     xml.FindElem( "Incomes" );
     xml.IntoElem();
     xml.FindElem( "Income" );

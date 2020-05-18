@@ -17,7 +17,7 @@ void Incomes::setItem(string newItem)
 {
     item=newItem;
 }
-void Incomes::setAmount(float newAmount)
+void Incomes::setAmount(double newAmount)
 {
     amount=newAmount;
 }
@@ -37,7 +37,7 @@ string Incomes::getItem()
 {
     return item;
 }
-float Incomes::getAmount()
+double Incomes::getAmount()
 {
     return amount;
 }

@@ -22,6 +22,7 @@ public:
     int getIdOfLastIncome();
     vector <Incomes> loadIncomesOfLoggedInUser(int userId);
     int changeToNumber(string date);
+    int getIdOfNewIncome();
 };
 
 #endif

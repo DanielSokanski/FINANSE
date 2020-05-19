@@ -27,7 +27,6 @@ public:
     Expences enterNewExpence();
     void showAllExpences();
     void addExpence();
-    int getIdOfNewIncome();
     double getExpencesInCurrentMonth();
     double getExpencesInPreviousMonth();
     double getExpencesFromCustomDates(string startDate, string endDate);

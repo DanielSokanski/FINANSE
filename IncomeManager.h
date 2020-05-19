@@ -26,7 +26,6 @@ public:
     Incomes enterNewIncome();
     void showAllIncomes();
     void addIncomes();
-    int getIdOfNewIncome();
     double getIncomesInCurrentMonth();
     double getIncomesInPreviousMonth();
     double getIncomesFromCustomDates(string startDate, string endDate);

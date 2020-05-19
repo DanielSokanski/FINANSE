@@ -22,10 +22,11 @@ using namespace std;
 class AuxiliaryFunctions {
 public:
     static string changeCommaToDotInAmount(string amount);
-    static int todaysDate();
+    static string todaysDate();
     static bool checkIfDateIsCorrect(string date);
     static char getSign();
     static bool leapyear (int year);
+    static int todaysDateInt(string dateInCorrectFormat);
 };
 
 

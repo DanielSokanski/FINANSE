@@ -7,7 +7,7 @@ void Incomes::setIncomeId(int newIncomeId) {
 void Incomes::setUserId(int newUserId) {
     userId=newUserId;
 }
-void Incomes::setDate(int newDate) {
+void Incomes::setDate(string newDate) {
     date=newDate;
 }
 void Incomes::setItem(string newItem) {
@@ -22,7 +22,7 @@ int Incomes::getIncomeId() {
 int Incomes::getUserId() {
     return userId;
 }
-int Incomes::getDate() {
+string Incomes::getDate() {
     return date;
 }
 string Incomes::getItem() {

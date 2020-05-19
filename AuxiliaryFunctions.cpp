@@ -1,6 +1,6 @@
 #include "AuxiliaryFunctions.h"
 
-int AuxiliaryFunctions::todaysDate() {
+string AuxiliaryFunctions::todaysDate() {
     vector<int> date;
     time_t t = time(0);
     struct tm * now = localtime( & t );
@@ -11,7 +11,34 @@ int AuxiliaryFunctions::todaysDate() {
     todaysDateInt = date[0]*10000+date[1]*100+date[2];
 
     date.clear();
-    return todaysDateInt;
+    ostringstream dateInString;
+    dateInString << todaysDateInt;
+    string str = dateInString.str();
+    string dateInCorrectFormat = "";
+    for (int i=0; i<4; i++) {
+        dateInCorrectFormat = dateInCorrectFormat + str[i];
+    }
+    dateInCorrectFormat = dateInCorrectFormat + "-";
+    for (int i=0; i<2; i++) {
+        dateInCorrectFormat = dateInCorrectFormat + str[i+4];
+    }
+    dateInCorrectFormat = dateInCorrectFormat + "-";
+    for (int i=0; i<2; i++) {
+        dateInCorrectFormat = dateInCorrectFormat + str[i+6];
+    }
+    return dateInCorrectFormat;
+}
+
+int AuxiliaryFunctions::todaysDateInt(string dateInCorrectFormat)
+{
+    string dateInPureString = "";
+    for (int i=0; i<dateInCorrectFormat.length(); i++) {
+    if (dateInCorrectFormat[i] != '-')
+        dateInPureString = dateInPureString + dateInCorrectFormat[i];
+    }
+
+    int dateInInt = atoi(dateInPureString.c_str());
+    return dateInInt;
 }
 
 char AuxiliaryFunctions::getSign() {

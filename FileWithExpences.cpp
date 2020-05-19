@@ -20,7 +20,7 @@ vector <Expences> FileWithExpences::loadExpencesOfLoggedInUser(int userId) {
             xml.FindElem("userId");
             expence.setUserId(atoi(MCD_2PCSZ(xml.GetData())));
             xml.FindElem("date");
-            expence.setDate(changeToNumber(MCD_2PCSZ(xml.GetData())));
+            expence.setDate(MCD_2PCSZ(xml.GetData()));
             xml.FindElem("item");
             expence.setItem(MCD_2PCSZ(xml.GetData()));
             xml.FindElem("amount");
@@ -84,4 +84,17 @@ int FileWithExpences::loadUserId() {
     xml.OutOfElem();
     return USERID;
 }
-
+int FileWithExpences::getIdOfNewExpence(){
+    int expenceNo = 0;
+    CMarkup xml;
+    xml.Load( "expences.xml" );
+    xml.FindElem("Expences");
+    xml.IntoElem();
+    while (xml.FindElem("Expence")){
+    xml.IntoElem();
+    xml.FindElem("expenceId");
+    expenceNo = atoi(MCD_2PCSZ(xml.GetData()));
+    xml.OutOfElem();
+    }
+    return expenceNo+1;
+}

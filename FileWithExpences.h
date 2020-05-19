@@ -23,6 +23,7 @@ public:
     int getIdOfLastExpence();
     vector <Expences> loadExpencesOfLoggedInUser(int userId);
     int changeToNumber(string date);
+    int getIdOfNewExpence();
 };
 
 #endif

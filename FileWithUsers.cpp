@@ -55,23 +55,29 @@ void FileWithUsers::addUserToFile(User user) {
     xml.OutOfElem();
 }
 void FileWithUsers::saveAllUsersToFile(vector<User> &users) {
-    bool fileExists = xml.Load( "users.xml" );
+
+    xml.Load( "users.xml" );
+    xml.ResetMainPos();
+    while ( xml.FindElem() ) {
     xml.RemoveElem();
-    if (!fileExists) {
-        xml.SetDoc("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n");
-        xml.AddElem("Users");
     }
-    xml.FindElem();
-    xml.IntoElem();
-    xml.AddElem("User");
-    xml.IntoElem();
+    xml.Save("users.xml");
+    xml.OutOfElem();
     for (int i=0; i<users.size(); i++) {
+        bool fileExists = xml.Load( "users.xml" );
+        if (!fileExists) {
+            xml.AddElem("Users");
+        }
+        xml.FindElem();
+        xml.IntoElem();
+        xml.AddElem("User");
+        xml.IntoElem();
         xml.AddElem("UserId", users[i].getUserId());
         xml.AddElem("Login", users[i].getLogin());
         xml.AddElem("Password", users[i].getPassword());
         xml.AddElem("Name", users[i].getName());
         xml.AddElem("Surname", users[i].getSurname());
+        xml.Save("users.xml");
         xml.OutOfElem();
     }
-    xml.Save("users.xml");
 }

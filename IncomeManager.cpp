@@ -3,7 +3,7 @@
 void IncomeManager::showAllIncomes() {
     system("cls");
     if (!incomes.empty()) {
-        cout << "             >>> Wydatki <<<" << endl;
+        cout << "             >>> Przychody <<<" << endl;
         cout << "-----------------------------------------------" << endl;
         cout <<incomes.size()<<endl;
         for (int i=0; i<incomes.size(); i++) {
@@ -15,7 +15,7 @@ void IncomeManager::showAllIncomes() {
         }
         cout << endl;
     } else {
-        cout << endl << "Lista wydatkow jest pusta." << endl << endl;
+        cout << endl << "Lista przychodow jest pusta." << endl << endl;
     }
     system("pause");
 
@@ -24,20 +24,20 @@ void IncomeManager::addIncomes() {
     Incomes income = enterNewIncome();
     incomes.push_back(income);
     fileWithIncomes.addIncomesToFile(income);
-    cout << endl << "Wprowadzono nowy wydatek." << endl << endl;
+    cout << endl << "Wprowadzono nowy przychod." << endl << endl;
     system("pause");
 }
 
 Incomes IncomeManager::enterNewIncome() {
     Incomes income;
-    income.setIncomeId(getIdOfNewIncome());
+    income.setIncomeId(fileWithIncomes.getIdOfNewIncome());
     income.setUserId(LOGGED_IN_USER_ID);
     string date, item;
     string amount;
     char choise;
     string correctAmount="";
-    cout << "Wpisz date wydatku: ";
-    cout << endl << "Czy dzis poniosles wydatek? (T,N): ";
+    cout << "Wpisz date przychod: ";
+    cout << endl << "Czy dzis uzyskales przychod? (T,N): ";
     choise = AuxiliaryFunctions::getSign();
     if ((choise=='T')||(choise=='t')) {
         income.setDate(AuxiliaryFunctions::todaysDate());
@@ -50,14 +50,14 @@ Incomes IncomeManager::enterNewIncome() {
             getline(cin,date);
             AuxiliaryFunctions::checkIfDateIsCorrect(date);
         }
-        int dateInt = fileWithIncomes.changeToNumber(date);
-        income.setDate(dateInt);
-        dateInt = 0;
+        //int dateInt = fileWithIncomes.changeToNumber(date);
+        income.setDate(date);
+        //dateInt = 0;
     }
-    cout << "Czego dotyczy wydatek: ";
+    cout << "Czego dotyczy przychod: ";
     getline(cin, item);
     income.setItem(item);
-    cout << "Podaj kwote wydatku: ";
+    cout << "Podaj kwote przychodu: ";
     getline(cin, amount);
     correctAmount = AuxiliaryFunctions::changeCommaToDotInAmount(amount);
     income.setAmount(correctAmount);
@@ -66,20 +66,14 @@ Incomes IncomeManager::enterNewIncome() {
     return income;
 }
 
-int IncomeManager::getIdOfNewIncome() {
-
-    if (incomes.empty() == true)
-        return 1;
-    else
-        return incomes.size()+1;
-}
 
 double IncomeManager::getIncomesInCurrentMonth() {
     Incomes income;
-    int date = AuxiliaryFunctions::todaysDate();
+    string dateInString = AuxiliaryFunctions::todaysDate();
+    int date = AuxiliaryFunctions::todaysDateInt(dateInString);
     double totalIncomes = 0;
     for (int i=0; i<incomes.size(); i++) {
-        if (incomes[i].getDate()/100 == date/100) {
+        if (AuxiliaryFunctions::todaysDateInt(incomes[i].getDate())/100 == date/100) {
             double amount= 0;
             amount = (double)atof(incomes[i].getAmount().c_str());
             totalIncomes = totalIncomes + amount;
@@ -89,10 +83,11 @@ double IncomeManager::getIncomesInCurrentMonth() {
 }
 double IncomeManager::getIncomesInPreviousMonth() {
     Incomes income;
-    int date = AuxiliaryFunctions::todaysDate();
+    string dateInString = AuxiliaryFunctions::todaysDate();
+    int date = AuxiliaryFunctions::todaysDateInt(dateInString);
     double totalIncomes = 0;
     for (int i=0; i<incomes.size(); i++) {
-        if (incomes[i].getDate()/100 == (date/100)-1) {
+        if (AuxiliaryFunctions::todaysDateInt(incomes[i].getDate())/100 == (date/100)-1) {
             double amount= 0;
             amount = (double)atof(incomes[i].getAmount().c_str());
             totalIncomes = totalIncomes + amount;
@@ -106,7 +101,7 @@ double IncomeManager::getIncomesFromCustomDates(string startDate, string endDate
     double totalIncomes = 0;
     for (int i=0; i<incomes.size(); i++) {
         double amount = 0;
-        if ((incomes[i].getDate() >= beginDate)&&(incomes[i].getDate() <= finishDate))
+        if ((AuxiliaryFunctions::todaysDateInt(incomes[i].getDate()) >= beginDate)&&(AuxiliaryFunctions::todaysDateInt(incomes[i].getDate()) <= finishDate))
 
             amount = (double)atof(incomes[i].getAmount().c_str());
         totalIncomes = totalIncomes + amount;

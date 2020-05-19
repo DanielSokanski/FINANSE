@@ -7,7 +7,7 @@ void Expences::setExpenceId(int newExpenceId) {
 void Expences::setUserId(int newUserId) {
     userId=newUserId;
 }
-void Expences::setDate(int newDate) {
+void Expences::setDate(string newDate) {
     date=newDate;
 }
 void Expences::setItem(string newItem) {
@@ -22,7 +22,7 @@ int Expences::getExpenceId() {
 int Expences::getUserId() {
     return userId;
 }
-int Expences::getDate() {
+string Expences::getDate() {
     return date;
 }
 string Expences::getItem() {

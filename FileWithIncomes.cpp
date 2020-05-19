@@ -20,7 +20,7 @@ vector <Incomes> FileWithIncomes::loadIncomesOfLoggedInUser(int userId) {
             xml.FindElem("userId");
             income.setUserId(atoi(MCD_2PCSZ(xml.GetData())));
             xml.FindElem("date");
-            income.setDate(changeToNumber(MCD_2PCSZ(xml.GetData())));
+            income.setDate(MCD_2PCSZ(xml.GetData()));
             xml.FindElem("item");
             income.setItem(MCD_2PCSZ(xml.GetData()));
             xml.FindElem("amount");
@@ -83,3 +83,17 @@ int FileWithIncomes::loadUserId() {
     return USERID;
 }
 
+int FileWithIncomes::getIdOfNewIncome(){
+    int incomeNo = 0;
+    CMarkup xml;
+    xml.Load( "incomes.xml" );
+    xml.FindElem("Incomes");
+    xml.IntoElem();
+    while (xml.FindElem("Income")){
+    xml.IntoElem();
+    xml.FindElem("incomeId");
+    incomeNo = atoi(MCD_2PCSZ(xml.GetData()));
+    xml.OutOfElem();
+    }
+    return incomeNo+1;
+}

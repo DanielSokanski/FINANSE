@@ -8,22 +8,16 @@
 #include <cstdlib>
 #include "Incomes.h"
 #include "Markup.h"
-//#include "XMLFile.h"
 
-
-
-class FileWithIncomes
-{
-    //const string FILE_NAME_WITH_INCOMES;
+class FileWithIncomes {
     CMarkup xml;
     int lastIncomeId;
     int loadUserId();
     vector<Incomes>incomes;
 public:
-    FileWithIncomes()//(string fileName) : XMLFile(fileName)
-        {
+    FileWithIncomes() {
         lastIncomeId = 0;
-        };
+    };
     void addIncomesToFile(Incomes incomes);
     int getIdOfLastIncome();
     vector <Incomes> loadIncomesOfLoggedInUser(int userId);

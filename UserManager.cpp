@@ -1,7 +1,6 @@
 #include "UserManager.h"
 
-char UserManager::chooseOptionFromMainMenu()
-{
+char UserManager::chooseOptionFromMainMenu() {
     char choise;
     system("cls");
     cout << "    >>> MENU  GLOWNE <<<" << endl;
@@ -15,25 +14,21 @@ char UserManager::chooseOptionFromMainMenu()
     return choise;
 }
 
-bool UserManager::isUserLogedIn()
-{
+bool UserManager::isUserLogedIn() {
     if (loggedInUserId > 0)
         return true;
     else
-            return false;
+        return false;
 }
 
-char UserManager::getLine()
-{
+char UserManager::getLine() {
     string input = "";
     char choice  = {0};
 
-    while (true)
-    {
+    while (true) {
         getline(cin, input);
 
-        if (input.length() == 1)
-        {
+        if (input.length() == 1) {
             choice = input[0];
             break;
         }
@@ -42,9 +37,7 @@ char UserManager::getLine()
     return choice;
 }
 
-
-char UserManager::chooseOptionFromUserMenu()
-{
+char UserManager::chooseOptionFromUserMenu() {
     char choise;
     system("cls");
     cout << " >>> MENU UZYTKOWNIKA <<<" << endl;
@@ -56,15 +49,14 @@ char UserManager::chooseOptionFromUserMenu()
     cout << "5. Bilans z wybranego okresu" << endl;
     cout << "---------------------------" << endl;
     cout << "6. Zmien haslo" << endl;
-    cout << "7. Wyloguj siê" << endl;
+    cout << "7. Wyloguj sie" << endl;
     cout << "---------------------------" << endl;
     cout << "Twoj wybor: ";
     choise = getLine();
     return choise;
 }
 
-void UserManager::registrationOfUser()
-{
+void UserManager::registrationOfUser() {
     User user = enterNewUserData();
     users.push_back(user);
     fileWithUsers.addUserToFile(user);
@@ -72,13 +64,11 @@ void UserManager::registrationOfUser()
     system("pause");
 }
 
-User UserManager::enterNewUserData()
-{
+User UserManager::enterNewUserData() {
     User user;
     user.setUserId(getIdOfNewUser());
     string login;
-    do
-    {
+    do {
         cout << "Podaj login: ";
         cin >> login;
         user.setLogin(login);
@@ -96,20 +86,16 @@ User UserManager::enterNewUserData()
     return user;
 }
 
-int UserManager::getIdOfNewUser()
-{
+int UserManager::getIdOfNewUser() {
     if (users.empty() == true)
         return 1;
     else
         return users.back().getUserId() + 1;
 }
 
-bool UserManager::doesLoginExist(string login)
-{
-    for (int i=0; i < users.size(); i++)
-    {
-        if (users[i].getLogin() == login)
-        {
+bool UserManager::doesLoginExist(string login) {
+    for (int i=0; i < users.size(); i++) {
+        if (users[i].getLogin() == login) {
             cout << endl << "Istnieje uzytkownik o takim loginie." << endl;
             return true;
         }
@@ -117,10 +103,8 @@ bool UserManager::doesLoginExist(string login)
     return false;
 }
 
-void UserManager::showAllUsers()
-{
-    for (int i=0; i < users.size(); i++)
-    {
+void UserManager::showAllUsers() {
+    for (int i=0; i < users.size(); i++) {
         cout << users[i].getUserId() << endl;
         cout << users[i].getLogin() << endl;
         cout << users[i].getPassword() << endl;
@@ -129,24 +113,19 @@ void UserManager::showAllUsers()
     }
 }
 
-void UserManager::loginOfUser()
-{
+void UserManager::loginOfUser() {
     User user;
     string login = "", password = "";
     cout << endl << "Podaj login: ";
     login = getWholeLine();
     vector <User>::iterator itr = users.begin();
-    while (itr != users.end())
-    {
-        if (itr -> getLogin() == login)
-        {
-            for (int noOfChances = 3; noOfChances > 0; noOfChances--)
-            {
+    while (itr != users.end()) {
+        if (itr -> getLogin() == login) {
+            for (int noOfChances = 3; noOfChances > 0; noOfChances--) {
                 cout << "Podaj haslo. Pozostalo prob: " << noOfChances << ": ";
                 password = getWholeLine();
 
-                if (itr -> getPassword() == password)
-                {
+                if (itr -> getPassword() == password) {
                     loggedInUserId = itr -> getUserId();
                     cout << endl << "Zalogowales sie." << endl << endl;
                     system("pause");
@@ -164,99 +143,23 @@ void UserManager::loginOfUser()
     return;
 }
 
-string UserManager::getWholeLine()
-{
+string UserManager::getWholeLine() {
     string input = "";
     getline(cin, input);
     return input;
 }
 
-
-int UserManager::getIdOfLoggedInUser()
-{
+int UserManager::getIdOfLoggedInUser() {
     return loggedInUserId;
 }
 
-/*void UserManager::compareExpencesToIncomesInCurrentMonth()
-{
-float totalIncomesInCurrentMonth = IncomeManager.getIncomesFromCurrentMonth();
-float totalExpencesInCurrentMonth = ExpenceManager.getExpenceFromCurrentMonth();
-float balanceInCurrentMonth = 0;
-cout << "Przychody z biezacego miesaca = " << totalIncomesInCurrentMonth << endl;
-cout << "Koszty z biezacego miesaca = " << totalExpencesInCurrentMonth << endl;
-if (totalIncomesInCurrentMonth>totalExpencesInCurrentMonth)
-{
-    balanceInCurrentMonth = totalIncomesInCurrentMonth - totalExpencesInCurrentMonth;
-    cout << "W biezacym miesiacu wykazano zysk w wysokosci: " << balanceInCurrentMonth << " zl" << endl;
-}
-else if (totalExpencesInCurrentMonth>totalIncomesInCurrentMonth)
-{
-    balanceInCurrentMonth = totalExpencesInCurrentMonth - totalIncomesInCurrentMonth;
-    cout << "W biezacym miesiacu wykazano strate w wysokosci: " << balanceInCurrentMonth << " zl" << endl;
-}
-else if (totalExpencesInCurrentMonth==totalIncomesInCurrentMonth)
-{
-    cout << "W biezacym miesiacu bilans przychodow i kosztow wyniosl : " << balanceInCurrentMonth << " zl" << endl;
-}
-system ("pause");
-}
-
-void UserManager::compareExpencesToIncomesInPreviousMonth()
-{
-float totalIncomesInPreviousMonth = IncomeManager.getIncomesFromPreviousMonth();
-float totalExpencesInPreviousMonth = ExpenceManager.getExpenceFromPreviousMonth();
-float balanceInPreviousMonth = 0;
-cout << "Przychody z biezacego miesaca = " << totalIncomesInPreviousMonth << endl;
-cout << "Koszty z biezacego miesaca = " << totalExpencesInPreviousMonth << endl;
-if (totalIncomesInPreviousMonth>totalExpencesInPreviousMonth)
-{
-    balanceInPreviousMonth = totalIncomesInPreviousMonth - totalExpencesInPreviousMonth;
-    cout << "W biezacym miesiacu wykazano zysk w wysokosci: " << balanceInPreviousMonth << " zl" << endl;
-}
-else if (totalExpencesInPreviousMonth>totalIncomesInPreviousMonth)
-{
-    balanceInPreviousMonth = totalExpencesInPreviousMonth - totalIncomesInPreviousMonth;
-    cout << "W biezacym miesiacu wykazano strate w wysokosci: " << balanceInPreviousMonth << " zl" << endl;
-}
-else if (totalExpencesInPreviousMonth==totalIncomesInPreviousMonth)
-{
-    cout << "W biezacym miesiacu bilans przychodow i kosztow wyniosl : " << balanceInPreviousMonth << " zl" << endl;
-}
-system ("pause");
-}
-void UserManager::compareExpencesToIncomesFromCustomDates()
-{
-float totalIncomesInCustomDates = IncomeManager.getIncomesFromCustomDate();
-float totalExpencesInCustomDates = ExpenceManager.getExpenceFromCustomDate();
-float balanceInCustomDates = 0;
-cout << "Przychody z biezacego miesaca = " << totalIncomesInCustomDates << endl;
-cout << "Koszty z biezacego miesaca = " << totalExpencesInCustomDates << endl;
-if (totalIncomesInCustomDates>totalExpencesInCustomDates)
-{
-    balanceInPreviousMonth = totalIncomesInCustomDates - totalExpencesInCustomDates;
-    cout << "W biezacym miesiacu wykazano zysk w wysokosci: " << balanceInPreviousMonth << " zl" << endl;
-}
-else if (totalExpencesInCustomDates>totalIncomesInCustomDates)
-{
-    balanceInPreviousMonth = totalExpencesInCustomDates - totalIncomesInCustomDates;
-    cout << "W biezacym miesiacu wykazano strate w wysokosci: " << balanceInPreviousMonth << " zl" << endl;
-}
-else if (totalExpencesInCustomDates==totalIncomesInCustomDates)
-{
-    cout << "W biezacym miesiacu bilans przychodow i kosztow wyniosl : " << balanceInPreviousMonth << " zl" << endl;
-}
-system ("pause");
-}*/
-void UserManager::changePassword()
-{
+void UserManager::changePassword() {
     User user;
     string newPassword = "";
     cout << "Podaj nowe haslo: ";
     newPassword = getWholeLine();
-    for (vector <User>::iterator itr = users.begin(); itr != users.end(); itr++)
-    {
-        if (itr -> getUserId() == loggedInUserId)
-        {
+    for (vector <User>::iterator itr = users.begin(); itr != users.end(); itr++) {
+        if (itr -> getUserId() == loggedInUserId) {
 
             itr -> setPassword(newPassword);
             cout << "Haslo zostalo zmienione." << endl << endl;
@@ -265,7 +168,7 @@ void UserManager::changePassword()
     }
     fileWithUsers.saveAllUsersToFile(users);
 }
-void UserManager::logoutOfUser()
-{
+
+void UserManager::logoutOfUser() {
     loggedInUserId = 0;
 }

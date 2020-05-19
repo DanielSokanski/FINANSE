@@ -1,24 +1,21 @@
 #include "FileWithUsers.h"
 
 
-vector <User> FileWithUsers::loadUsersFromFile()
-{
+vector <User> FileWithUsers::loadUsersFromFile() {
     User user;
     vector <User> users;
 
     bool fileExists = xml.Load( "users.xml" );
     xml.FindElem( "Users" );
     xml.IntoElem();
-    while(xml.FindElem( "User" ))
-    {
-    user = getUserData();
-    users.push_back(user);
-    xml.OutOfElem();
+    while(xml.FindElem( "User" )) {
+        user = getUserData();
+        users.push_back(user);
+        xml.OutOfElem();
     }
     return users;
 }
-User FileWithUsers::getUserData()
-{
+User FileWithUsers::getUserData() {
     User user;
     xml.IntoElem();
     xml.FindElem("UserId");
@@ -34,13 +31,11 @@ User FileWithUsers::getUserData()
     return user;
 }
 
-void FileWithUsers::addUserToFile(User user)
-{
+void FileWithUsers::addUserToFile(User user) {
 
     bool fileExists = xml.Load( "users.xml" );
 
-    if (!fileExists)
-    {
+    if (!fileExists) {
         xml.SetDoc("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n");
         xml.AddElem("Users");
     }
@@ -59,20 +54,18 @@ void FileWithUsers::addUserToFile(User user)
 
     xml.OutOfElem();
 }
-void FileWithUsers::saveAllUsersToFile(vector<User> &users)
-{
+void FileWithUsers::saveAllUsersToFile(vector<User> &users) {
     bool fileExists = xml.Load( "users.xml" );
     xml.RemoveElem();
-    if (!fileExists)
-        {
+    if (!fileExists) {
         xml.SetDoc("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n");
         xml.AddElem("Users");
-        }
+    }
     xml.FindElem();
     xml.IntoElem();
     xml.AddElem("User");
     xml.IntoElem();
-    for (int i=0; i<users.size(); i++){
+    for (int i=0; i<users.size(); i++) {
         xml.AddElem("UserId", users[i].getUserId());
         xml.AddElem("Login", users[i].getLogin());
         xml.AddElem("Password", users[i].getPassword());

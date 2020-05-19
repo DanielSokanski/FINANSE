@@ -19,36 +19,27 @@
 
 using namespace std;
 
-class IncomeManager
-{
-
+class IncomeManager {
     vector <Incomes>incomes;
     FileWithIncomes fileWithIncomes;
     const int LOGGED_IN_USER_ID;
     int loggedInUserId;
     void showIncomesData(Incomes income);
-
 public:
-    IncomeManager (int loggedInUserId)://string fileNameWithIncomes, int loggedInUserId) :
-        //fileWithIncomes(fileNameWithIncomes),
-         LOGGED_IN_USER_ID (loggedInUserId)
-        {
+    IncomeManager (int loggedInUserId): LOGGED_IN_USER_ID (loggedInUserId) {
         incomes = fileWithIncomes.loadIncomesOfLoggedInUser(LOGGED_IN_USER_ID);
-        };
+    };
     Incomes enterNewIncome();
     void showAllIncomes();
     void addIncomes();
-    double changeCommaToDotInAmount(string amount);
+    string changeCommaToDotInAmount(string amount);
     int todaysDate();
     bool checkIfDateIsCorrect(string date);
-    //float getIncomesFromCurrentMonth();
-    //float getIncomesFromPreviousMonth();
-    //float getIncomesFromCustomDate();
+    double getIncomesInCurrentMonth();
     char getSign();
     int getIdOfNewIncome();
     bool leapyear (int year);
-
+    double getIncomesInPreviousMonth();
+    double getIncomesFromCustomDates(string startDate, string endDate);
 };
-
-
 #endif

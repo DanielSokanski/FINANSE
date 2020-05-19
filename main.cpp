@@ -4,25 +4,14 @@
 #include "IncomeManager.h"
 using namespace std;
 
-int main()
-{
-
+int main() {
     YourBudget yourBudget;
-    //("users.xml" , "incomes.xml" ,"expences.xml");
-
-    //FileWithUsers fileWithUsers("users.xml");
-    //FileWithExpences fileWithExpences("expences.xml");
-    //FileWithIncomes fileWithIncomes("incomes.xml");
-
     char choise;
-    while (true)
-    {
-        if (yourBudget.isUserLogedIn()==false)
-        {
+    while (true) {
+        if (yourBudget.isUserLogedIn()==false) {
             choise = yourBudget.chooseOptionFromMainMenu();
 
-            switch (choise)
-            {
+            switch (choise) {
             case '1':
                 yourBudget.registrationOfUser();
                 break;
@@ -43,27 +32,24 @@ int main()
                 break;
 
             }
-        }
-        else
-        {
+        } else {
             if (yourBudget.isUserLogedIn() == true)
-            choise = yourBudget.chooseOptionFromUserMenu();
-            switch (choise)
-            {
+                choise = yourBudget.chooseOptionFromUserMenu();
+            switch (choise) {
             case '1':
                 yourBudget.addIncome();
                 break;
             case '2':
-                //yourBudget.addExpence();
+                yourBudget.addExpence();
                 break;
             case '3':
-                //yourBudget.compareExpencesToIncomesInCurrentMonth();
+                yourBudget.compareExpencesToIncomesInCurrentMonth();
                 break;
             case '4':
-                //yourBudget.compareExpencesToIncomesInPreviousMonth();
+                yourBudget.compareExpencesToIncomesInPreviousMonth();
                 break;
             case '5':
-                //yourBudget.compareExpencesToIncomesFromCustomDates();
+                yourBudget.compareExpencesToIncomesFromCustomDates();
                 break;
             case '6':
                 yourBudget.changePassword();
@@ -71,11 +57,6 @@ int main()
             case '7':
                 yourBudget.logoutOfUser();
                 break;
-            case '8':
-                yourBudget.showAllIncomes();
-                break;
-
-
             }
         }
     }

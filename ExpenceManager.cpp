@@ -1,48 +1,48 @@
-#include "IncomeManager.h"
+#include "ExpenceManager.h"
 
-void IncomeManager::showAllIncomes() {
+void ExpenceManager::showAllExpences() {
     system("cls");
-    if (!incomes.empty()) {
-        cout << "             >>> Wydatki <<<" << endl;
+    if (!expences.empty()) {
+        cout << "             >>> Przychody <<<" << endl;
         cout << "-----------------------------------------------" << endl;
-        cout <<incomes.size()<<endl;
-        for (int i=0; i<incomes.size(); i++) {
-            cout << endl << "Id wydatku: " << incomes[i].getIncomeId() << endl;
-            cout << "Id uzytkownika:     " << incomes[i].getUserId() << endl;
-            cout << "Data:               " << incomes[i].getDate() << endl;
-            cout << "Wydatek:            " << incomes[i].getItem() << endl;
-            cout << "Kwota:              " << incomes[i].getAmount() << endl;
+        cout <<expences.size()<<endl;
+        for (int i=0; i<expences.size(); i++) {
+            cout << endl << "Id wydatku: " << expences[i].getExpenceId() << endl;
+            cout << "Id uzytkownika:     " << expences[i].getUserId() << endl;
+            cout << "Data:               " << expences[i].getDate() << endl;
+            cout << "Wydatek:            " << expences[i].getItem() << endl;
+            cout << "Kwota:              " << expences[i].getAmount() << endl;
         }
         cout << endl;
     } else {
-        cout << endl << "Lista wydatkow jest pusta." << endl << endl;
+        cout << endl << "Lista przychodow jest pusta." << endl << endl;
     }
     system("pause");
 
 }
-void IncomeManager::addIncomes() {
-    Incomes income = enterNewIncome();
-    incomes.push_back(income);
-    fileWithIncomes.addIncomesToFile(income);
-    cout << endl << "Wprowadzono nowy wydatek." << endl << endl;
+void ExpenceManager::addExpence() {
+    Expences expence = enterNewExpence();
+    expences.push_back(expence);
+    fileWithExpences.addExpenceToFile(expence);
+    cout << endl << "Wprowadzono nowy przychod." << endl << endl;
     system("pause");
 }
 
-Incomes IncomeManager::enterNewIncome() {
-    Incomes income;
-    income.setIncomeId(getIdOfNewIncome());
-    income.setUserId(LOGGED_IN_USER_ID);
+Expences ExpenceManager::enterNewExpence() {
+    Expences expence;
+    expence.setExpenceId(getIdOfNewIncome());
+    expence.setUserId(LOGGED_IN_USER_ID);
     string date, item;
     string amount;
     char choise;
     string correctAmount="";
     cout << "Wpisz date wydatku: ";
-    cout << endl << "Czy dzis poniosles wydatek? (T,N): ";
+    cout << endl << "Czy osiagnales przychod dzisiaj? (T,N): ";
     choise = getSign();
     if ((choise=='T')||(choise=='t')) {
-        income.setDate(todaysDate());
+        expence.setDate(todaysDate());
     } else {
-        cout << "Wpisz date w formacie rrrr-mm-dd:";
+        cout << "Wpisz date przychodu w formacie rrrr-mm-dd:";
         cin.clear();
         getline(cin,date);
         if (checkIfDateIsCorrect(date)==false) {
@@ -50,22 +50,20 @@ Incomes IncomeManager::enterNewIncome() {
             getline(cin,date);
             checkIfDateIsCorrect(date);
         }
-        int dateInt = fileWithIncomes.changeToNumber(date);
-        income.setDate(dateInt);
+        int dateInt = fileWithExpences.changeToNumber(date);
+        expence.setDate(dateInt);
         dateInt = 0;
     }
-    cout << "Czego dotyczy wydatek: ";
+    cout << "Czego dotyczy przychod: ";
     getline(cin, item);
-    income.setItem(item);
-    cout << "Podaj kwote wydatku: ";
+    expence.setItem(item);
+    cout << "Podaj kwote przychod: ";
     getline(cin, amount);
     correctAmount = changeCommaToDotInAmount(amount);
-    income.setAmount(correctAmount);
-
-
-    return income;
+    expence.setAmount(correctAmount);
+    return expence;
 }
-int IncomeManager::todaysDate() {
+int ExpenceManager::todaysDate() {
     vector<int> date;
     time_t t = time(0);
     struct tm * now = localtime( & t );
@@ -78,7 +76,7 @@ int IncomeManager::todaysDate() {
     date.clear();
     return todaysDateInt;
 }
-char IncomeManager::getSign() {
+char ExpenceManager::getSign() {
     string income = "";
     char sign  = {0};
     while (true) {
@@ -93,15 +91,16 @@ char IncomeManager::getSign() {
     return sign;
 }
 
-int IncomeManager::getIdOfNewIncome() {
 
-    if (incomes.empty() == true)
+int ExpenceManager::getIdOfNewIncome() {
+
+    if (expences.empty() == true)
         return 1;
     else
-        return incomes.size()+1;
+        return expences.size()+1;
 }
 
-string IncomeManager::changeCommaToDotInAmount(string amount) {
+string ExpenceManager::changeCommaToDotInAmount(string amount) {
     string amountWithDot="";
     double correctAmount = 0;
     for (int i=0; i<amount.length(); i++) {
@@ -113,49 +112,49 @@ string IncomeManager::changeCommaToDotInAmount(string amount) {
     return amountWithDot;
 }
 
-double IncomeManager::getIncomesInCurrentMonth() {
-    Incomes income;
+double ExpenceManager::getExpencesInCurrentMonth() {
+    Expences expence;
     int date = todaysDate();
-    double totalIncomes = 0;
-    for (int i=0; i<incomes.size(); i++) {
-        if (incomes[i].getDate()/100 == date/100) {
+    double totalExpence = 0;
+    for (int i=0; i<expences.size(); i++) {
+        if (expences[i].getDate()/100 == date/100) {
             double amount= 0;
-            amount = (double)atof(incomes[i].getAmount().c_str());
-            totalIncomes = totalIncomes + amount;
+            amount = (double)atof(expences[i].getAmount().c_str());
+            totalExpence = totalExpence + amount;
         }
     }
-    return totalIncomes;
+    return totalExpence;
 }
-double IncomeManager::getIncomesInPreviousMonth() {
-    Incomes income;
+double ExpenceManager::getExpencesInPreviousMonth() {
+    Expences expence;
     int date = todaysDate();
-    double totalIncomes = 0;
-    for (int i=0; i<incomes.size(); i++) {
-        if (incomes[i].getDate()/100 == (date/100)-1) {
+    double totalExpence = 0;
+    for (int i=0; i<expences.size(); i++) {
+        if (expences[i].getDate()/100 == (date/100)-1) {
             double amount= 0;
-            amount = (double)atof(incomes[i].getAmount().c_str());
-            totalIncomes = totalIncomes + amount;
+            amount = (double)atof(expences[i].getAmount().c_str());
+            totalExpence = totalExpence + amount;
         }
     }
-    return totalIncomes;
+    return totalExpence;
 }
-double IncomeManager::getIncomesFromCustomDates(string startDate, string endDate) {
-    int beginDate = fileWithIncomes.changeToNumber(startDate);
-    int finishDate = fileWithIncomes.changeToNumber(endDate);
-    double totalIncomes = 0;
-    for (int i=0; i<incomes.size(); i++) {
+double ExpenceManager::getExpencesFromCustomDates(string startDate, string endDate) {
+    int beginDate = fileWithExpences.changeToNumber(startDate);
+    int finishDate = fileWithExpences.changeToNumber(endDate);
+    double totalExpence = 0;
+    for (int i=0; i<expences.size(); i++) {
         double amount = 0;
-        if ((incomes[i].getDate() >= beginDate)&&(incomes[i].getDate() <= finishDate))
+        if ((expences[i].getDate() >= beginDate)&&(expences[i].getDate() <= finishDate))
 
-            amount = (double)atof(incomes[i].getAmount().c_str());
-        totalIncomes = totalIncomes + amount;
+            amount = (double)atof(expences[i].getAmount().c_str());
+        totalExpence = totalExpence + amount;
 
     }
 
-    return totalIncomes;
+    return totalExpence;
 }
 
-bool IncomeManager::checkIfDateIsCorrect(string date) {
+bool ExpenceManager::checkIfDateIsCorrect(string date) {
 
     int day, month, year;
     string seperating = "";
@@ -205,16 +204,16 @@ bool IncomeManager::checkIfDateIsCorrect(string date) {
         }
     }
 }
-bool IncomeManager::leapyear (int year) {
+bool ExpenceManager::leapyear (int year) {
     if(( year%4 == 0 && year%100 != 0) || ( year%400 == 0 ));
     else
         false;
 }
 
-void IncomeManager::showIncomesData(Incomes income) {
-    cout << endl << "Id:         " << income.getIncomeId() << endl;
-    cout << "Id uzytkownika:     " << income.getUserId() << endl;
-    cout << "Data:               " << income.getDate() << endl;
-    cout << "Przychod:           " << income.getItem() << endl;
-    cout << "Kwota:              " << income.getAmount() << endl;
+void ExpenceManager::showExpencesData(Expences expence) {
+    cout << endl << "Id:         " << expence.getExpenceId() << endl;
+    cout << "Id uzytkownika:     " << expence.getUserId() << endl;
+    cout << "Data:               " << expence.getDate() << endl;
+    cout << "Przychod:           " << expence.getItem() << endl;
+    cout << "Kwota:              " << expence.getAmount() << endl;
 }

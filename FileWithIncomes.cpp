@@ -1,66 +1,46 @@
 #include "FileWithIncomes.h"
 
-vector <Incomes> FileWithIncomes::loadIncomesOfLoggedInUser(int userId)
-{
+vector <Incomes> FileWithIncomes::loadIncomesOfLoggedInUser(int userId) {
     Incomes income;
     vector <Incomes> incomes;
 
-        //cout << userId << endl;
-        //system("pause");
     int USERID = 0;
     string amount="";
     CMarkup xml;
     bool fileExists = xml.Load( "incomes.xml" );
     xml.FindElem( "Incomes" );
     xml.IntoElem();
-    while(xml.FindElem( "Income" ))
-    {
-    xml.IntoElem();
-    xml.FindElem("userId");
-    USERID = atoi(MCD_2PCSZ(xml.GetData()));
-        cout << USERID << endl;
-        system("pause");
-    if (USERID == userId)
-    {
-     xml.FindElem("incomeId");
-        income.setIncomeId(atoi(MCD_2PCSZ(xml.GetData())));
-        cout << atoi(MCD_2PCSZ(xml.GetData()))<< endl;
+    while(xml.FindElem( "Income" )) {
+        xml.IntoElem();
         xml.FindElem("userId");
-        income.setUserId(atoi(MCD_2PCSZ(xml.GetData())));
-        cout << atoi(MCD_2PCSZ(xml.GetData()))<< endl;
-        xml.FindElem("date");
-        income.setDate(changeToNumber(MCD_2PCSZ(xml.GetData())));
-        cout << changeToNumber(MCD_2PCSZ(xml.GetData()))<< endl;
-        xml.FindElem("item");
-        income.setItem(MCD_2PCSZ(xml.GetData()));
-        cout << MCD_2PCSZ(xml.GetData())<< endl;
-        xml.FindElem("amount");
-        amount = MCD_2PCSZ(xml.GetData());
-        cout << amount << endl;
-        income.setAmount((double)atof(amount. c_str()));
-        cout << (double)atof(amount. c_str())<< endl;
-
-    incomes.push_back(income);
-
+        USERID = atoi(MCD_2PCSZ(xml.GetData()));
+        if (USERID == userId) {
+            xml.FindElem("incomeId");
+            income.setIncomeId(atoi(MCD_2PCSZ(xml.GetData())));
+            xml.FindElem("userId");
+            income.setUserId(atoi(MCD_2PCSZ(xml.GetData())));
+            xml.FindElem("date");
+            income.setDate(changeToNumber(MCD_2PCSZ(xml.GetData())));
+            xml.FindElem("item");
+            income.setItem(MCD_2PCSZ(xml.GetData()));
+            xml.FindElem("amount");
+            amount = MCD_2PCSZ(xml.GetData());
+            income.setAmount(MCD_2PCSZ(xml.GetData()));
+            incomes.push_back(income);
+        }
+        xml.OutOfElem();
     }
-    xml.OutOfElem();
-    }
-
     return incomes;
 }
 
-
-void FileWithIncomes::addIncomesToFile(Incomes incomes)
-{
+void FileWithIncomes::addIncomesToFile(Incomes incomes) {
     CMarkup xml;
     bool fileExists = xml.Load("incomes.xml");
 
-    if (!fileExists)
-    {
+    if (!fileExists) {
         xml.SetDoc("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n");
         xml.AddElem("Incomes");
     }
-
     xml.FindElem();
     xml.IntoElem();
     xml.AddElem("Income");
@@ -74,16 +54,14 @@ void FileWithIncomes::addIncomesToFile(Incomes incomes)
     xml.OutOfElem();
 }
 
-int FileWithIncomes::changeToNumber(string date)
-{
+int FileWithIncomes::changeToNumber(string date) {
     int fullDate = 0;
     vector<string> tempDate;
     tempDate.clear();
     string yearmonthday = "";
-    for (int i=0; i<date.length();i++)
-    {
-        if(date[i]!='-'){
-        yearmonthday = yearmonthday + date[i];
+    for (int i=0; i<date.length(); i++) {
+        if(date[i]!='-') {
+            yearmonthday = yearmonthday + date[i];
         }
     }
     tempDate.push_back(yearmonthday);
@@ -91,8 +69,7 @@ int FileWithIncomes::changeToNumber(string date)
 
     return fullDate;
 }
-int FileWithIncomes::loadUserId()
-{
+int FileWithIncomes::loadUserId() {
     CMarkup xml;
 
     xml.Load( "incomes.xml" );

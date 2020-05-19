@@ -3,6 +3,8 @@
 char UserManager::chooseOptionFromMainMenu() {
     char choise;
     system("cls");
+    cout << "    >>> TWOJ PROGRAM DO ZARZADANIA BUDZETEM <<<" << endl;
+    cout << "-----------------------------------------------" << endl;
     cout << "    >>> MENU  GLOWNE <<<" << endl;
     cout << "---------------------------" << endl;
     cout << "1. Rejestracja" << endl;

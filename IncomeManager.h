@@ -3,12 +3,6 @@
 
 #include<iostream>
 #include<vector>
-#include<windows.h>
-#include <sstream>
-#include <algorithm>
-#include <cstdlib>
-#include <time.h>
-#include <string>
 
 #include"UserManager.h"
 #include"FileWithUsers.h"
@@ -16,7 +10,7 @@
 #include"Incomes.h"
 #include"User.h"
 #include"XMLFile.h"
-
+#include "AuxiliaryFunctions.h"
 using namespace std;
 
 class IncomeManager {
@@ -32,13 +26,8 @@ public:
     Incomes enterNewIncome();
     void showAllIncomes();
     void addIncomes();
-    string changeCommaToDotInAmount(string amount);
-    int todaysDate();
-    bool checkIfDateIsCorrect(string date);
-    double getIncomesInCurrentMonth();
-    char getSign();
     int getIdOfNewIncome();
-    bool leapyear (int year);
+    double getIncomesInCurrentMonth();
     double getIncomesInPreviousMonth();
     double getIncomesFromCustomDates(string startDate, string endDate);
 };

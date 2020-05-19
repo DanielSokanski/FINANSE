@@ -69,21 +69,16 @@
 1589876368 e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\incomes.h
 	<iostream>
 
-1589876368 e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\incomemanager.h
+1589877828 e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\incomemanager.h
 	<iostream>
 	<vector>
-	<windows.h>
-	<sstream>
-	<algorithm>
-	<cstdlib>
-	<time.h>
-	<string>
 	"UserManager.h"
 	"FileWithUsers.h"
 	"FileWithIncomes.h"
 	"Incomes.h"
 	"User.h"
 	"XMLFile.h"
+	"AuxiliaryFunctions.h"
 
 1589876368 e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\filewithincomes.h
 	<iostream>
@@ -97,7 +92,7 @@
 1589875806 source:e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\filewithincomes.cpp
 	"FileWithIncomes.h"
 
-1589876368 source:e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\incomemanager.cpp
+1589877681 source:e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\incomemanager.cpp
 	"IncomeManager.h"
 
 1589876368 source:e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\expences.cpp
@@ -118,7 +113,26 @@
 	"Expences.h"
 	"Markup.h"
 
-1589876368 e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\expencemanager.h
+1589877828 e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\expencemanager.h
+	<iostream>
+	<vector>
+	"UserManager.h"
+	"FileWithUsers.h"
+	"FileWithExpences.h"
+	"Expences.h"
+	"User.h"
+	"XMLFile.h"
+	"AuxiliaryFunctions.h"
+
+1589877639 source:e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\expencemanager.cpp
+	"ExpenceManager.h"
+
+1589873859 e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\comparision.h
+	<iostream>
+	"IncomeManager.h"
+	"ExpenceManager.h"
+
+1589877362 e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\auxiliaryfunctions.h
 	<iostream>
 	<vector>
 	<windows.h>
@@ -134,11 +148,6 @@
 	"User.h"
 	"XMLFile.h"
 
-1589875395 source:e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\expencemanager.cpp
-	"ExpenceManager.h"
-
-1589873859 e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\comparision.h
-	<iostream>
-	"IncomeManager.h"
-	"ExpenceManager.h"
+1589877362 source:e:\diablo 3\prywatne\bud疾t domowy 30.03.2020\program do uporz卡kowania\od nowa\auxiliaryfunctions.cpp
+	"AuxiliaryFunctions.h"
 

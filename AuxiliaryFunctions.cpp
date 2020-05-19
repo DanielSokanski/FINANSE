@@ -103,7 +103,7 @@ bool AuxiliaryFunctions::checkIfDateIsCorrect(string date) {
         }
     } else if (month == 2) {
         bool leapyear (year);
-        if (leapyear == true)
+        if (leapyear)
             if (day > 29) {
                 cout << "Rok "<< year <<" jest przestepny. Zatem miesiac " << month << " ma maksymalnie 29 dni. Wpisz ponownie: ";
                 return false;
